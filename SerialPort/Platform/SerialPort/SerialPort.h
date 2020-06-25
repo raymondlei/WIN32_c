@@ -46,7 +46,8 @@ extern "C"
 {
 #endif
 
-    extern void SerialPort_Create(SerialPortT* handle, char* port_name);
+    extern bool SerialPort_Init(SerialPortT* handle);
+    extern void SerialPort_Open(SerialPortT* handle, char* port_name);
     extern void SerialPort_PurgeAll(SerialPortT* handle);
     extern void SerialPort_Close(SerialPortT* handle);
 

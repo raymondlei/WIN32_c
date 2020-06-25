@@ -23,7 +23,18 @@ static void _defaultSettings(SerialPortT* handle);
 static void _defaultTimeout(SerialPortT* handle);
 static void _attachEvent(SerialPortT* handle, uint16_t bit_fields);
 
-void SerialPort_Create(SerialPortT* handle, char* port_name)
+bool SerialPort_Init(SerialPortT* handle)
+{
+    SerialPort_Open(handle, COM_11);
+    SerialPort_Configure(handle);
+
+    if(SerialPort_isOpened(handle))
+        return true;
+    else
+        return false;
+}
+
+void SerialPort_Open(SerialPortT* handle, char* port_name)
 {
     handle->hComm = CreateFile(port_name,  //see #define COM_xx
                                GENERIC_READ | GENERIC_WRITE, //Read/Write
